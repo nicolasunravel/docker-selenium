@@ -3,19 +3,20 @@ VERSION := $(or $(VERSION),$(VERSION),'2.52.0')
 PLATFORM := $(shell uname -s)
 BUILD_ARGS := $(BUILD_ARGS)
 
-all: hub chrome firefox chrome_debug firefox_debug standalone_chrome standalone_firefox standalone_chrome_debug standalone_firefox_debug
+#all: hub chrome firefox chrome_debug firefox_debug standalone_chrome standalone_firefox standalone_chrome_debug standalone_firefox_debug
+all: hub chrome firefox
 
 generate_all:	\
 	generate_hub \
 	generate_nodebase \
 	generate_chrome \
 	generate_firefox \
-	generate_chrome_debug \
-	generate_firefox_debug \
-	generate_standalone_firefox \
-	generate_standalone_chrome \
-	generate_standalone_firefox_debug \
-	generate_standalone_chrome_debug
+#	generate_chrome_debug \
+#	generate_firefox_debug \
+#	generate_standalone_firefox \
+#	generate_standalone_chrome \
+#	generate_standalone_firefox_debug \
+#	generate_standalone_chrome_debug
 
 build: all
 

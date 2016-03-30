@@ -7,9 +7,17 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 # Timezone settings
 # Possible alternative: https://github.com/docker/docker/issues/3359#issuecomment-32150214
 #===================
-ENV TZ "US/Pacific"
-RUN echo "US/Pacific" | sudo tee /etc/timezone \
+ENV TZ "UTC"
+RUN echo "UTC" | sudo tee /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
+
+
+#===================================
+# Dockerize for waiting dependencies
+#===================================
+RUN apt-get -qqy update && apt-get install -qqy wget
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz
+RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.2.0.tar.gz
 
 #==============
 # VNC and Xvfb

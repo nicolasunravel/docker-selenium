@@ -6,6 +6,7 @@ if [ ! -e /opt/selenium/config.json ]; then
   exit 1
 fi
 
+sleep 10
 if [ -z "$HUB_PORT_4444_TCP_ADDR" ]; then
   echo Not linked with a running Hub container 1>&2
   exit 1
