@@ -1,4 +1,4 @@
-FROM selenium/base:2.52.0
+FROM selenium/base:2.53.0
 MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -9,7 +9,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 # Possible alternative: https://github.com/docker/docker/issues/3359#issuecomment-32150214
 #===================
 ENV TZ "UTC"
-RUN echo "UTC" | sudo tee /etc/timezone \
+RUN echo "${TZ}" > /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
 
@@ -31,7 +31,10 @@ RUN apt-get update -qqy \
 #==============================
 # Scripts to run Selenium Node
 #==============================
-COPY entry_point.sh /opt/bin/entry_point.sh
+COPY \
+  entry_point.sh \
+  functions.sh \
+    /opt/bin/
 RUN chmod +x /opt/bin/entry_point.sh
 
 #============================
