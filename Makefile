@@ -1,10 +1,10 @@
-NAME := selenium
-VERSION := $(or $(VERSION),$(VERSION),'2.53.0')
+NAME := unravel
+VERSION := $(or $(VERSION),$(VERSION),'2.53.1')
 PLATFORM := $(shell uname -s)
 BUILD_ARGS := $(BUILD_ARGS)
 
 #all: hub chrome firefox chrome_debug firefox_debug standalone_chrome standalone_firefox standalone_chrome_debug standalone_firefox_debug
-all: hub chrome firefox
+all: hub chrome upload
 
 generate_all:	\
 	generate_hub \
@@ -22,8 +22,12 @@ build: all
 
 ci: build test
 
+upload:
+	docker push unravel/hub:$(VERSION)
+	docker push unravel/node-chrome:$(VERSION)
+
 base:
-	cd ./Base && docker build $(BUILD_ARGS) -t $(NAME)/base:$(VERSION) .
+	cd ./Base && docker build $(BUILD_ARGS) -t $(NAME)/selenium_base:$(VERSION) .
 
 generate_hub:
 	cd ./Hub && ./generate.sh $(VERSION)

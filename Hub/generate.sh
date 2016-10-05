@@ -1,5 +1,5 @@
 #!/bin/bash
 VERSION=$1
 
-echo FROM selenium/base:$VERSION > ./Dockerfile
+echo FROM unravel/selenium_base:$VERSION > ./Dockerfile
 cat ./Dockerfile.txt >> ./Dockerfile
