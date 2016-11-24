@@ -1,10 +1,10 @@
 NAME := unravel
-VERSION := $(or $(VERSION),$(VERSION),'2.53.1')
+VERSION := $(or $(VERSION),$(VERSION),'3.0.1')
 PLATFORM := $(shell uname -s)
 BUILD_ARGS := $(BUILD_ARGS)
 
 #all: hub chrome firefox chrome_debug firefox_debug standalone_chrome standalone_firefox standalone_chrome_debug standalone_firefox_debug
-all: hub chrome upload
+all: hub chrome upload chrome_debug chrome_ffmpeg
 
 generate_all:	\
 	generate_hub \
@@ -34,6 +34,12 @@ generate_hub:
 
 hub: base generate_hub
 	cd ./Hub && docker build $(BUILD_ARGS) -t $(NAME)/hub:$(VERSION) .
+
+generate_hub_video:
+	cd ./HubVideo && ./generate.sh $(VERSION)
+
+hub_video: base generate_hub_video
+	cd ./HubVideo && docker build $(BUILD_ARGS) -t $(NAME)/hub_video:$(VERSION) .
 
 generate_nodebase:
 	cd ./NodeBase && ./generate.sh $(VERSION)
@@ -83,6 +89,9 @@ generate_chrome_debug:
 chrome_debug: generate_chrome_debug chrome
 	cd ./NodeChromeDebug && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome-debug:$(VERSION) .
 
+chrome_ffmpeg: chrome
+	cd ./NodeChromeFfmpeg && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome-ffmpeg:$(VERSION) .
+
 generate_firefox_debug:
 	cd ./NodeDebug && ./generate.sh NodeFirefoxDebug node-firefox Firefox $(VERSION)
 
@@ -90,17 +99,17 @@ firefox_debug: generate_firefox_debug firefox
 	cd ./NodeFirefoxDebug && docker build $(BUILD_ARGS) -t $(NAME)/node-firefox-debug:$(VERSION) .
 
 tag_latest:
-	docker tag $(NAME)/base:$(VERSION) $(NAME)/base:latest
+#	docker tag $(NAME)/base:$(VERSION) $(NAME)/base:latest
 	docker tag $(NAME)/hub:$(VERSION) $(NAME)/hub:latest
-	docker tag $(NAME)/node-base:$(VERSION) $(NAME)/node-base:latest
+#	docker tag $(NAME)/node-base:$(VERSION) $(NAME)/node-base:latest
 	docker tag $(NAME)/node-chrome:$(VERSION) $(NAME)/node-chrome:latest
 	docker tag $(NAME)/node-firefox:$(VERSION) $(NAME)/node-firefox:latest
-	docker tag $(NAME)/node-chrome-debug:$(VERSION) $(NAME)/node-chrome-debug:latest
-	docker tag $(NAME)/node-firefox-debug:$(VERSION) $(NAME)/node-firefox-debug:latest
-	docker tag $(NAME)/standalone-chrome:$(VERSION) $(NAME)/standalone-chrome:latest
-	docker tag $(NAME)/standalone-firefox:$(VERSION) $(NAME)/standalone-firefox:latest
-	docker tag $(NAME)/standalone-chrome-debug:$(VERSION) $(NAME)/standalone-chrome-debug:latest
-	docker tag $(NAME)/standalone-firefox-debug:$(VERSION) $(NAME)/standalone-firefox-debug:latest
+#	docker tag $(NAME)/node-chrome-debug:$(VERSION) $(NAME)/node-chrome-debug:latest
+#	docker tag $(NAME)/node-firefox-debug:$(VERSION) $(NAME)/node-firefox-debug:latest
+#	docker tag $(NAME)/standalone-chrome:$(VERSION) $(NAME)/standalone-chrome:latest
+#	docker tag $(NAME)/standalone-firefox:$(VERSION) $(NAME)/standalone-firefox:latest
+#	docker tag $(NAME)/standalone-chrome-debug:$(VERSION) $(NAME)/standalone-chrome-debug:latest
+#	docker tag $(NAME)/standalone-firefox-debug:$(VERSION) $(NAME)/standalone-firefox-debug:latest
 
 release: tag_latest
 	@if ! docker images $(NAME)/base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
