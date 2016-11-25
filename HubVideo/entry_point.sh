@@ -26,7 +26,7 @@ function shutdown {
 # https://github.com/aimmac23/selenium-video-node/blob/master/INSTALLATION.md
 # http://stackoverflow.com/questions/11922681/differences-between-java-cp-and-java-jar
 # /!\ video-node docs references v2.0
-java -cp /opt/selenium/selenium-video-node-2.1.jar:/opt/selenium/selenium-server-standalone.jar \
+java ${JAVA_OPTS} -cp /opt/selenium/selenium-video-node-2.1.jar:/opt/selenium/selenium-server-standalone.jar \
     org.openqa.grid.selenium.GridLauncherV3 -servlets com.aimmac23.hub.servlet.HubVideoDownloadServlet \
   -role hub \
   -hubConfig $CONF \

@@ -1,4 +1,4 @@
-FROM unravel/selenium_base:2.53.1
+FROM unravel/selenium_base:3.0.1
 MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
 ENV DEBIAN_FRONTEND noninteractive

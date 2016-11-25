@@ -53,6 +53,12 @@ generate_chrome:
 chrome: nodebase generate_chrome
 	cd ./NodeChrome && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome:$(VERSION) .
 
+generate_chrome_video:
+	cd ./NodeChromeVideo && ./generate.sh $(VERSION)
+
+chrome_video: nodebase generate_chrome
+	cd ./NodeChromeVideo && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome_video:$(VERSION) .
+
 generate_firefox:
 		cd ./NodeFirefox && ./generate.sh $(VERSION)
 
@@ -88,9 +94,6 @@ generate_chrome_debug:
 
 chrome_debug: generate_chrome_debug chrome
 	cd ./NodeChromeDebug && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome-debug:$(VERSION) .
-
-chrome_ffmpeg: chrome
-	cd ./NodeChromeFfmpeg && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome-ffmpeg:$(VERSION) .
 
 generate_firefox_debug:
 	cd ./NodeDebug && ./generate.sh NodeFirefoxDebug node-firefox Firefox $(VERSION)

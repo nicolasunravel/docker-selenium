@@ -1,4 +1,4 @@
-FROM unravel/node-base:2.53.1
+FROM unravel/node-base:3.0.1
 MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
 USER root
@@ -17,7 +17,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 #==================
 # Chrome webdriver
 #==================
-ENV CHROME_DRIVER_VERSION 2.21
+ENV CHROME_DRIVER_VERSION 2.25
 RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
   && rm -rf /opt/selenium/chromedriver \
   && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
@@ -36,6 +36,23 @@ COPY config.json /opt/selenium/config.json
 #=================================
 COPY chrome_launcher.sh /opt/google/chrome/google-chrome
 RUN chmod +x /opt/google/chrome/google-chrome
+
+#===========================
+# video recording capability
+# https://github.com/aimmac23/selenium-video-node/blob/master/INSTALLATION.md
+#===========================
+RUN apt-get -qqy update && apt-get install -qqy wget
+# video extension alongside the hub code
+RUN wget http://repo1.maven.org/maven2/com/aimmac23/selenium-video-node/2.1/selenium-video-node-2.1.jar -O /opt/selenium/selenium-video-node-2.1.jar
+
+#==============================
+# Scripts to run Selenium Node
+#==============================
+COPY \
+  entry_point.sh \
+    /opt/bin/
+RUN chmod +x /opt/bin/entry_point.sh
+
 
 USER seluser
 # Following line fixes
