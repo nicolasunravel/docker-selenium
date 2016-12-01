@@ -32,18 +32,12 @@ fi
 # TODO: Look into http://www.seleniumhq.org/docs/05_selenium_rc.jsp#browser-side-logs
 
 SERVERNUM=$(get_server_num)
-#xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
-#  java ${JAVA_OPTS} -jar /opt/selenium/selenium-server-standalone.jar \
-#    -role node \
-#    -hub http://$HUB_PORT_4444_TCP_ADDR:$HUB_PORT_4444_TCP_PORT/grid/register \
-#    ${REMOTE_HOST_PARAM} \
-#    -nodeConfig /opt/selenium/config.json \
-#    ${SE_OPTS} &
 
 xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
   java ${JAVA_OPTS} -cp /opt/selenium/selenium-video-node-2.1.jar:/opt/selenium/selenium-server-standalone.jar \
     org.openqa.grid.selenium.GridLauncherV3 \
     -servlets com.aimmac23.node.servlet.VideoRecordingControlServlet \
+    -Dvideo.framerate=25 \
     -proxy com.aimmac23.hub.proxy.VideoProxy \
     -role node \
     -hub http://$HUB_PORT_4444_TCP_ADDR:$HUB_PORT_4444_TCP_PORT/grid/register \
