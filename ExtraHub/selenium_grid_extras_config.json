@@ -1,0 +1,26 @@
+{
+  "theConfigMap": {
+    "hub_config_files": [
+      "config.json"
+    ],
+    "auto_start_hub": "1",
+    "iedriver": {},
+    "default_role": "hub",
+    "chromedriver": {
+      "bit": "64",
+      "version": "2.25"
+    },
+    "auto_update_drivers": "1",
+    "auto_start_node": "0",
+    "hub_config": {},
+    "geckodriver": {
+      "version": "0.11.1"
+    },
+    "log_maximum_age_ms": 864000000,
+    "grid_extras_port": 3000,
+    "webdriver": {
+      "version": "3.0.1"
+    },
+    "node_config_files": []
+  }
+}
