@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# unused for now TBC
+
+echo "
+{
+  \"capabilities\": [
+    {
+      \"browserName\": \"chrome\",
+      \"maxInstances\": 1,
+      \"seleniumProtocol\": \"WebDriver\",
+      \"version\": \"\",
+      \"platform\": \"LINUX\"
+    }
+  ],
+  \"configuration\": {
+      \"loadedFromFile\": \"config.json\",
+      \"proxy\": \"com.groupon.seleniumgridextras.grid.proxies.SetupTeardownProxy\",
+      \"maxSession\": 1,
+      \"port\": 5555,
+      \"hubPort\": 4444,
+      \"hubHost\": \"hub\",
+      \"register\": true,
+      \"registerCycle\": 5000,
+      \"nodeStatusCheckTimeout\": 10000,
+      \"downPollingLimit\": 0
+    }
+}"
+
+

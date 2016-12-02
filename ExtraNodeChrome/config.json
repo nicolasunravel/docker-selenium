@@ -3,15 +3,21 @@
     {
       "browserName": "chrome",
       "maxInstances": 1,
-      "seleniumProtocol": "WebDriver"
+      "seleniumProtocol": "WebDriver",
+      "version": "",
+      "platform": "LINUX"
     }
   ],
-   "loadedFromFile": "config.json",
-    "proxy": "com.groupon.seleniumgridextras.grid.proxies.SetupTeardownProxy",
-    "maxSession": 1,
-    "port": 5555,
-    "register": true,
-    "registerCycle": 5000,
-    "nodeStatusCheckTimeout": 10000,
-    "downPollingLimit": 0
+  "configuration": {
+      "loadedFromFile": "config.json",
+      "proxy": "com.groupon.seleniumgridextras.grid.proxies.SetupTeardownProxy",
+      "maxSession": 1,
+      "port": 5555,
+      "hubPort": 4444,
+      "hubHost": "hub",
+      "register": true,
+      "registerCycle": 5000,
+      "nodeStatusCheckTimeout": 10000,
+      "downPollingLimit": 0
+    }
 }

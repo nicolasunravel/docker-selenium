@@ -25,7 +25,7 @@
       "version": "3.0.1"
     },
     "node_config_files": [
-      "node_5555.json"
+      "config.json"
     ]
   }
 }

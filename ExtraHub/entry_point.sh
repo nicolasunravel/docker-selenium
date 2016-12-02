@@ -19,9 +19,9 @@ function shutdown {
 }
 
 java ${JAVA_OPTS} -jar /opt/selenium/selenium-server-standalone.jar
-#  -role hub \
-#  -hubConfig $CONF \
-#  ${SE_OPTS} &
+  -role hub \
+  -hubConfig $CONF \
+  ${SE_OPTS} &
 NODE_PID=$!
 
 trap shutdown SIGTERM SIGINT

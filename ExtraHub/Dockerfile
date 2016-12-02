@@ -29,6 +29,8 @@ COPY entry_point.sh /opt/bin/entry_point.sh
 # xtra
 RUN mkdir /opt/selenium/configs
 RUN mkdir /opt/selenium/log
+RUN mkdir /opt/selenium/video_output
+RUN mkdir /opt/selenium/shared
 
 # /xtra
 
@@ -36,6 +38,6 @@ RUN chown -R seluser /opt/selenium
 COPY selenium_grid_extras_config.json /opt/selenium/selenium_grid_extras_config.json
 
 USER seluser
-
+WORKDIR /opt/selenium
 CMD ["/opt/bin/entry_point.sh"]
 

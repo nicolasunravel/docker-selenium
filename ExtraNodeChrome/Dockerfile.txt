@@ -42,14 +42,17 @@ RUN chmod +x /opt/google/chrome/google-chrome
 RUN  wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v1.12.7/SeleniumGridExtras-1.12.7-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
 
 # xtra
-RUN mkdir /opt/selenium/configs
 RUN mkdir /opt/selenium/log
+RUN mkdir /opt/selenium/video_output
+RUN mkdir /opt/selenium/shared
+
+#COPY cached_release_list.json /opt/selenium/cached_release_list.json
 COPY selenium_grid_extras_config.json /opt/selenium/selenium_grid_extras_config.json
+WORKDIR /opt/selenium
 # /xtra
 
 RUN chown -R seluser /opt/selenium
 USER seluser
-
 # Following line fixes
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
