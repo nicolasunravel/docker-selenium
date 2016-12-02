@@ -1,0 +1,17 @@
+{
+  "capabilities": [
+    {
+      "browserName": "chrome",
+      "maxInstances": 1,
+      "seleniumProtocol": "WebDriver"
+    }
+  ],
+   "loadedFromFile": "config.json",
+    "proxy": "com.groupon.seleniumgridextras.grid.proxies.SetupTeardownProxy",
+    "maxSession": 1,
+    "port": 5555,
+    "register": true,
+    "registerCycle": 5000,
+    "nodeStatusCheckTimeout": 10000,
+    "downPollingLimit": 0
+}
