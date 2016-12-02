@@ -35,17 +35,17 @@ generate_hub:
 hub: base generate_hub
 	cd ./Hub && docker build $(BUILD_ARGS) -t $(NAME)/hub:$(VERSION) .
 
-generate_hub_extra:
+generate_hub_video:
 	cd ./ExtraHub && ./generate.sh $(VERSION)
 
-hub_extra: base generate_hub_extra
-	cd ./ExtraHub && docker build $(BUILD_ARGS) -t $(NAME)/hub_extra:$(VERSION) .
-
-generate_hub_video:
-	cd ./HubVideo && ./generate.sh $(VERSION)
-
 hub_video: base generate_hub_video
-	cd ./HubVideo && docker build $(BUILD_ARGS) -t $(NAME)/hub_video:$(VERSION) .
+	cd ./ExtraHub && docker build $(BUILD_ARGS) -t $(NAME)/hub_video:$(VERSION) .
+
+#generate_hub_video:
+#	cd ./HubVideo && ./generate.sh $(VERSION)
+#
+#hub_video: base generate_hub_video
+#	cd ./HubVideo && docker build $(BUILD_ARGS) -t $(NAME)/hub_video:$(VERSION) .
 
 generate_nodebase:
 	cd ./NodeBase && ./generate.sh $(VERSION)
@@ -59,17 +59,17 @@ generate_chrome:
 chrome: nodebase generate_chrome
 	cd ./NodeChrome && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome:$(VERSION) .
 
+#generate_chrome_video:
+#	cd ./NodeChromeVideo && ./generate.sh $(VERSION)
+#
+#chrome_video: nodebase generate_chrome_video
+#	cd ./NodeChromeVideo && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome_video:$(VERSION) .
+
 generate_chrome_video:
-	cd ./NodeChromeVideo && ./generate.sh $(VERSION)
-
-chrome_video: nodebase generate_chrome_video
-	cd ./NodeChromeVideo && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome_video:$(VERSION) .
-
-generate_chrome_extra:
 	cd ./ExtraNodeChrome && ./generate.sh $(VERSION)
 
-chrome_extra: nodebase generate_chrome_extra
-	cd ./ExtraNodeChrome && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome_extra:$(VERSION) .
+chrome_video: nodebase generate_chrome_video
+	cd ./ExtraNodeChrome && docker build $(BUILD_ARGS) -t $(NAME)/node-chrome_video:$(VERSION) .
 
 generate_firefox:
 		cd ./NodeFirefox && ./generate.sh $(VERSION)

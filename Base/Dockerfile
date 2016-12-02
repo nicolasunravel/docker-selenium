@@ -1,6 +1,13 @@
 FROM ubuntu:16.04
 MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
+#==================
+# Maintenance tools
+#==================
+# needed to install killall (extras)
+RUN apt-get update -qqy \
+  && apt-get -qqy install psmisc vim
+
 #================================================
 # Customize sources for apt-get
 #================================================
