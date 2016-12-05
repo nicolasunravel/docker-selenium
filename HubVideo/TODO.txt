@@ -1,0 +1,11 @@
+
+FPS is built with
+http://www.xuggle.com/public/documentation/java/api/com/xuggle/xuggler/IRational.html#make()
+
+Video recording
+https://github.com/groupon/Selenium-Grid-Extras/blob/master/SeleniumGridExtras/src/main/java/com/groupon/seleniumgridextras/utilities/threads/video/VideoRecorderCallable.java
+
+options settings
+https://github.com/groupon/Selenium-Grid-Extras/blob/master/SeleniumGridExtras/src/main/java/com/groupon/seleniumgridextras/config/VideoRecordingOptions.java
+
+amend config to avoid downloading IE Driver ....
