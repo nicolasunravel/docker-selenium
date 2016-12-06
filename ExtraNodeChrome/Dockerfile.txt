@@ -39,8 +39,8 @@ RUN chmod +x /opt/google/chrome/google-chrome
 #==========
 # Selenium
 #==========
-RUN  wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v1.12.7/SeleniumGridExtras-1.12.7-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
-
+ENV EXTRA_VERSION=1.12.9
+RUN wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v$EXTRA_VERSION/SeleniumGridExtras-$EXTRA_VERSION-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
 # xtra
 RUN mkdir /opt/selenium/log
 RUN mkdir /opt/selenium/video_output

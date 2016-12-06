@@ -3,27 +3,37 @@
     "auto_update_browser_versions": "1",
     "hub_config_files": [],
     "auto_start_hub": "0",
-    "iedriver": {},
     "default_role": "node",
+    "iedriver": {},
     "chromedriver": {
       "bit": "64",
       "version": "2.25"
     },
-    "auto_update_drivers": "1",
-    "video_recording_options": {
-      "videos_to_keep": "40"
-    },
-    "auto_start_node": "1",
-    "hub_config": {},
     "geckodriver": {
       "version": "0.11.1"
     },
-    "log_maximum_age_ms": 864000000,
-    "reboot_after_sessions": "1",
-    "grid_extras_port": 3000,
     "webdriver": {
       "version": "3.0.1"
     },
+    "auto_update_drivers": "1",
+    "video_recording_options": {
+      "frameSeconds": "1",
+      "frames": "25",
+      "videos_to_keep": "40",
+      "lower_third_background_color": "0,0,0,0",
+      "idle_video_timeout": "120",
+      "video_output_dir": "video_output",
+      "title_frame_font_color": "0,0,0,0",
+      "record_test_videos": "true",
+      "width": "1024",
+      "height": "768",
+      "lower_third_font_color": "0,0,0,0"
+    },
+    "auto_start_node": "1",
+    "hub_config": {},
+    "log_maximum_age_ms": 864000000,
+    "reboot_after_sessions": "0",
+    "grid_extras_port": 3000,
     "node_config_files": [
       "config.json"
     ]

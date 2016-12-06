@@ -19,8 +19,10 @@ ENV GRID_UNREGISTER_IF_STILL_DOWN_AFTER 30000
 #==========
 # Selenium
 #==========
+ENV EXTRA_VERSION=1.12.9
+
 RUN  mkdir -p /opt/selenium \
-  && wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v1.12.7/SeleniumGridExtras-1.12.7-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
+  && wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v$EXTRA_VERSION/SeleniumGridExtras-$EXTRA_VERSION-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
 
 COPY generate_config /opt/selenium/generate_config
 COPY entry_point.sh /opt/bin/entry_point.sh
