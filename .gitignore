@@ -7,3 +7,8 @@ node_modules/
 # Vim swap files.
 *.swp
 
+
+ExtraNodeChrome/Dockerfile
+HubVideo/Dockerfile
+NodeBase/Dockerfile
+NodeChromeVideo/Dockerfile
