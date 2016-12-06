@@ -1,0 +1,40 @@
+version: '2'
+services:
+
+#===============
+# selenium grid
+#===============
+
+  seleniumhub:
+    image: unravel/hub_video:3.0.1
+    # Console View URL: http://localhost:4444/grid/console
+    ports:
+      - "4444:4444"
+      - "3000:3000"
+    environment:
+      # in ms, 1m30
+      - GRID_TIMEOUT=90000
+      # 2 minutes
+      - GRID_UNREGISTER_IF_STILL_DOWN_AFTER=120000
+
+  chrome:
+    image: unravel/node-chrome_video:3.0.1
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    command: dockerize -wait http://hub:4444 /opt/bin/entry_point.sh
+    ports:
+      - "3001:3000"
+      - "5555:5555"
+    links:
+      - seleniumhub:hub
+      - browsermob:browsermob
+    volumes:
+      - /dev/urandom:/dev/random
+     # https://github.com/elgalu/docker-selenium/issues/20
+      - /dev/shm:/dev/shm
+
+  browsermob:
+    image: unravel/browsermob:latest
+    ports:
+      - "8080-9000:8080-9000"

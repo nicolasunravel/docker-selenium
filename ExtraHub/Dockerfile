@@ -6,6 +6,7 @@ MAINTAINER Selenium <selenium-developers@googlegroups.com>
 #========================
 
 EXPOSE 4444
+EXPOSE 3000
 
 ENV GRID_NEW_SESSION_WAIT_TIMEOUT -1
 ENV GRID_JETTY_MAX_THREADS -1
@@ -16,20 +17,27 @@ ENV GRID_BROWSER_TIMEOUT 0
 ENV GRID_MAX_SESSION 5
 ENV GRID_UNREGISTER_IF_STILL_DOWN_AFTER 30000
 
-#===========================
-# video recording capability
-# https://github.com/aimmac23/selenium-video-node/blob/master/INSTALLATION.md
-#===========================
-RUN apt-get -qqy update && apt-get install -qqy wget
-# video extension alongside the hub code
-RUN wget http://repo1.maven.org/maven2/com/aimmac23/selenium-video-node/2.1/selenium-video-node-2.1.jar -O /opt/selenium/selenium-video-node-2.1.jar
-
+#==========
+# Selenium
+#==========
+RUN  mkdir -p /opt/selenium \
+  && wget --no-verbose https://github.com/groupon/Selenium-Grid-Extras/releases/download/v1.12.7/SeleniumGridExtras-1.12.7-SNAPSHOT-jar-with-dependencies.jar -O /opt/selenium/selenium-server-standalone.jar
 
 COPY generate_config /opt/selenium/generate_config
 COPY entry_point.sh /opt/bin/entry_point.sh
+
+# xtra
+RUN mkdir /opt/selenium/configs
+RUN mkdir /opt/selenium/log
+RUN mkdir /opt/selenium/video_output
+RUN mkdir /opt/selenium/shared
+
+# /xtra
+
 RUN chown -R seluser /opt/selenium
+COPY selenium_grid_extras_config.json /opt/selenium/selenium_grid_extras_config.json
 
 USER seluser
-
+WORKDIR /opt/selenium
 CMD ["/opt/bin/entry_point.sh"]
 
